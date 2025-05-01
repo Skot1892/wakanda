@@ -1,0 +1,466 @@
+.custom-navbar {
+    background: linear-gradient(to bottom, rgba(0,0,0,0.8), rgba(0,0,0,0));
+    border: none;
+    position: fixed;
+    width: 100%;
+    border: none;
+    z-index: 1000;
+  }
+  
+  .custom-navbar .navbar-nav > li > a,
+  .custom-navbar .navbar-brand,
+  .custom-navbar .navbar-nav > li > a > span {
+    color: #C59421;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+.custom-navbar .navbar-nav > li.active > a,
+.custom-navbar .navbar-nav > li.active > a:focus,
+.custom-navbar .navbar-nav > li.active > a:hover {
+  background-color: transparent;
+  color: #f0f0f0;
+}
+
+.custom-navbar .navbar-toggle {
+  background-color: transparent;
+  border: none;
+}
+
+.custom-navbar .icon-bar {
+  background-color: #C59421;
+}
+
+.custom-navbar .navbar-nav > li > a:hover,
+.custom-navbar .navbar-brand:hover {
+  color: #f0f0f0;
+}
+
+.navbar {
+  margin-bottom: 0;
+  border-radius: 0;
+  background-color: transparent;
+  color: #c59421;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.nav-icon {
+  height: 32px;
+  width: auto;
+  vertical-align: middle;
+  position: relative;
+  top: 0;
+}
+
+.cart-icon:hover {
+  content: url('/static/images/basket-white-cart.png');
+}
+
+.user-icon:hover {
+  content: url('/static/images/user-white-mask.png');
+}
+
+body {
+  background: linear-gradient(to bottom, #0D0314, #554726);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content {
+  flex: 1;
+  font-family: 'Inter', sans-serif;
+}
+
+.content-products {
+  font-family: 'Inter', sans-serif;
+  padding-top: 80px;
+  min-width: 1000px;
+  max-width: 1500px;
+  margin: 0 auto;
+  color: white;
+}
+
+.content-products h1, .content-products h2 {
+  text-align: center;
+}
+
+footer {
+  padding: 1rem;
+  background-color: #321D45;
+  color: white;
+  text-align: center;
+  margin-top: auto;
+}
+
+.banner {
+  position: relative;
+  width: 100%;
+  height: 750px;
+  overflow: hidden;
+}
+
+.banner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.banner-text {
+  position: absolute;
+  top: 50%;
+  left: 30%;
+  transform: translate(-50%, -50%);
+  text-align: left;
+  color: white;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+.banner-text h1 {
+  font-size: 54px;
+  font-weight: bold;
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  background: linear-gradient(to bottom, #321D45, #C59421 90%);
+  -webkit-background-clip: text;
+  color: transparent;    
+}
+
+.box-section {
+  margin-top: 2rem;
+}
+
+.info-box {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  border: 2px solid #836419;
+}
+
+.tall-box {
+  height: 500px;
+}
+
+.small-box {
+  height: 240px;
+}
+
+.info-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.info-text {
+  position: absolute;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0);
+  width: 100%;
+  text-align: center;
+  padding: 10px 0;
+  transition: background 0.4s ease-in-out;
+}
+
+.info-text h3 {
+  color: white;
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+  font-family: 'Inter', sans-serif;
+}
+
+.info-box:hover .info-text {
+  background: rgba(13, 3, 20, 0.6);
+}
+
+.footer {
+  margin-top: auto;
+  padding: 1rem;
+  background-color: #0D0314;
+  color: white;
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+  width: 100%;
+}
+
+.products-container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin: 2rem auto;
+  width: 80%;
+}
+
+.products-section {
+  margin-top: 30px;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.products-section h2 {
+  text-align: center;
+  font-size: 28px;
+  color: white;
+  text-transform: uppercase;
+  padding: 10px;
+  width: 50%;
+  margin: auto;
+}
+
+.h2-title {
+  border: 2px solid #C59421;
+}
+.product-row {
+  display: flex;
+  overflow: hidden;
+  background: transparent;
+}
+
+.product-image {
+  position: relative;
+  width: 40%;
+  box-shadow: 2px 2px 10px rgba(0,0,0,0.4);
+  border:1px solid #C59421;
+}
+
+.product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.add-to-basket {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  color: white;
+  width: 100%;
+  text-align: center;
+  padding: 10px 0;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.4s ease, transform 0.4s ease;
+  border: none;
+  background: #0D0314;
+}
+
+.add-to-basket:hover {
+  color: #0D0314;
+  background: #C59421;
+}
+
+.product-details {
+  padding: 20px;
+  width: 60%;
+  color: white;
+  background: transparent;
+}
+
+.product-details h2 {
+  margin-top: 0;
+  font-size: 20px;
+  text-transform: uppercase;
+  color: #C59421;
+  font-weight: bold;
+  width: 100%;
+}
+
+.product-details p {
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+.filter-buttons {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.filter-buttons button {
+  background-color: #C59421;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 0 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.filter-buttons button:hover {
+  background-color: #321D45;
+}
+
+.filter-buttons button.active {
+  background-color: #321D45;
+  color: #f0f0f0;
+}
+
+.login-container {
+  width: 400px;
+  max-width: 90%;
+  margin: 100px auto 0 auto;
+  padding: 30px;
+  border: 2px solid #C59421;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.5);
+}
+
+.login-container h2 {
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.login-container input[type="text"],
+.login-container input[type="password"] {
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 1px solid #C59421;
+  padding: 10px;
+  color: black;
+  font-size: 16px;
+}
+
+.login-container button {
+  background-color: #C59421;
+  border: none;
+  font-weight: bold;
+  font-size: 16px;
+  transition: background 0.3s ease;
+}
+
+.login-container button:hover {
+  background-color: #321D45;
+  color: white;
+}
+
+.dashboard-container {
+  max-width: 1000px;
+  margin: 100px auto;
+  padding: 30px;
+  border: 2px solid #C59421;
+  color: white;
+}
+
+.dashboard-container h1 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.dashboard-section {
+  margin-bottom: 40px;
+}
+
+.dashboard-section h2 {
+  font-size: 22px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.dashboard-container ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.dashboard-container ul li {
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dashboard-container a {
+  color: #F0F0F0;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.dashboard-container a:hover {
+  color: #F0F0F0;
+}
+
+.basket-container {
+  width: 400px;
+  max-width: 500px;
+  margin: 100px auto;
+  padding: 30px;
+  border: 2px solid #C59421;
+  color: white;
+  font-family: 'Inter', sans-serif;
+}
+
+.basket-container ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.basket-container ul li {
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+.basket-container h3 {
+  margin-top: 20px;
+}
+
+.toast {
+  font-family: 'Inter', sans-serif;
+  visibility: hidden;
+  min-width: 200px;
+  background-color: #C59421;
+  color: black;
+  text-align: center;
+  padding: 16px;
+  position: fixed;
+  z-index: 999;
+  left: 50%;
+  bottom: 30px;
+  transform: translateX(-50%);
+  font-size: 17px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.toast.show {
+  visibility: visible;
+  opacity: 1;
+}
+
+#basket-count {
+  font-size: 14px;
+  color: #F0F0F0;
+}
+
+.remove-btn {
+  background: none;
+  border: none;
+  color: rgb(221, 17, 17);
+  font-size: 14px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.remove-btn:hover {
+  color: rgb(221, 17, 17, 0.2);
+}
+
+.btn-warning {
+  background-color: #C59421;
+  border: none;
+  color: black;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.btn-warning:hover {
+  background-color: #321D45;
+  color: white;
+}

@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark custom-navbar">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="{{ url_for('home') }}"></a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div
+          class="collapse navbar-collapse justify-content-center"
+          id="navbarNav"
+        >
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('home') }}">HOME</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('products', filter='all') }}"
+                >PRODUCTS</a
+              >
+            </li>
+          </ul>
+
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                href="{% if current_user.is_authenticated %}{{ url_for('dashboard') }}{% else %}{{ url_for('login') }}{% endif %}"
+              >
+                <img
+                  src="{{ url_for('static', filename='images/user-gold-mask.png') }}"
+                  alt="User Icon"
+                  class="nav-icon user-icon"
+                />
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('basket') }}">
+                <img
+                  src="{{ url_for('static', filename='images/basket-gold-cart.png') }}"
+                  alt="Cart"
+                  class="nav-icon cart-icon"
+                />
+                (<span id="basket-count"
+                  >{{ session.get('basket')|length if session.get('basket') else
+                  0 }}</span
+                >)
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="content-products">
+      <h1>PRODUCTS FROM WAKANDA</h1>
+
+      <div class="filter-buttons">
+        <button data-category="all" onclick="filterProducts('all')">ALL</button>
+        <button data-category="souvenirs" onclick="filterProducts('souvenirs')">
+          SOUVENIRS
+        </button>
+        <button data-category="tours" onclick="filterProducts('tours')">
+          TOURS
+        </button>
+        <button
+          data-category="experiences"
+          onclick="filterProducts('experiences')"
+        >
+          EXPERIENCES
+        </button>
+      </div>
+
+      <div class="sort-dropdown text-center my-4">
+        <label for="sort">Sort by: </label>
+        <select id="sort" onchange="sortProducts()">
+          <option value="none">Default</option>
+          <option value="low-to-high">Price: Low to High</option>
+          <option value="high-to-low">Price: High to Low</option>
+        </select>
+      </div>
+
+      <div class="products-section souvenirs">
+        <h2 class="h2-title">SOUVENIRS</h2>
+        <div class="products-container">
+          {% for product in souvenirs %}
+          <div class="product-row" data-price="{{ product.price }}">
+            <div class="product-image">
+              {% if product.image_url %}
+              <img
+                src="{{ url_for('static', filename=product.image_url[7:]) }}"
+                alt="{{ product.name }}"
+                class="img-fluid"
+              />
+              {% else %}
+              <img
+                src="{{ url_for('static', filename='images/default.jpg') }}"
+                alt="Default Image"
+                class="img-fluid"
+              />
+              {% endif %}
+
+              <div class="add-to-basket">
+                <form
+                  action="{{ url_for('add_to_basket', product_id=product.id) }}"
+                  method="POST"
+                  class="add-to-basket-form"
+                >
+                  <button type="submit" class="add-to-basket">
+                    ADD TO BASKET
+                  </button>
+                </form>
+              </div>
+            </div>
+
+            <div class="product-details">
+              <h2>{{ product.name }}</h2>
+              <p>{{ product.description }}</p>
+              <p><strong>Price:</strong> £{{ product.price }}</p>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="products-section tours">
+        <h2 class="h2-title">TOURS</h2>
+        <div class="products-container">
+          {% for product in tours %}
+          <div class="product-row" data-price="{{ product.price }}">
+            <div class="product-image">
+              {% if product.image_url %}
+              <img
+                src="{{ url_for('static', filename=product.image_url[7:]) }}"
+                alt="{{ product.name }}"
+                class="img-fluid"
+              />
+              {% else %}
+              <img
+                src="{{ url_for('static', filename='images/default.jpg') }}"
+                alt="Default Image"
+                class="img-fluid"
+              />
+              {% endif %}
+
+              <div class="add-to-basket">
+                <form
+                  action="{{ url_for('add_to_basket', product_id=product.id) }}"
+                  method="POST"
+                  class="add-to-basket-form"
+                >
+                  <button type="submit" class="add-to-basket">
+                    ADD TO BASKET
+                  </button>
+                </form>
+              </div>
+            </div>
+
+            <div class="product-details">
+              <h2>{{ product.name }}</h2>
+              <p>{{ product.description }}</p>
+              <p><strong>Price:</strong> £{{ product.price }}</p>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="products-section experiences">
+        <h2 class="h2-title">EXPERIENCES</h2>
+        <div class="products-container">
+          {% for product in experiences %}
+          <div class="product-row" data-price="{{ product.price }}">
+            <div class="product-image">
+              {% if product.image_url %}
+              <img
+                src="{{ url_for('static', filename=product.image_url[7:]) }}"
+                alt="{{ product.name }}"
+                class="img-fluid"
+              />
+              {% else %}
+              <img
+                src="{{ url_for('static', filename='images/default.jpg') }}"
+                alt="Default Image"
+                class="img-fluid"
+              />
+              {% endif %}
+
+              <div class="add-to-basket">
+                <form
+                  action="{{ url_for('add_to_basket', product_id=product.id) }}"
+                  method="POST"
+                  class="add-to-basket-form"
+                >
+                  <button type="submit" class="add-to-basket">
+                    ADD TO BASKET
+                  </button>
+                </form>
+              </div>
+            </div>
+
+            <div class="product-details">
+              <h2>{{ product.name }}</h2>
+              <p>{{ product.description }}</p>
+              <p><strong>Price:</strong> £{{ product.price }}</p>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <script>
+        function filterProducts(category) {
+          let sections = document.querySelectorAll(".products-section");
+          let buttons = document.querySelectorAll(".filter-buttons button");
+
+          sections.forEach((section) => {
+            section.style.display = "none";
+          });
+
+          buttons.forEach((button) => {
+            button.classList.remove("active");
+          });
+
+          if (category === "all") {
+            sections.forEach((section) => {
+              section.style.display = "block";
+            });
+          } else if (category !== "none") {
+            let selected = document.querySelector("." + category);
+            if (selected) {
+              selected.style.display = "block";
+            }
+          }
+
+          let activeButton = document.querySelector(
+            `.filter-buttons button[data-category="${category}"]`
+          );
+          if (activeButton) {
+            activeButton.classList.add("active");
+          }
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+          const params = new URLSearchParams(window.location.search);
+          const filter = params.get("filter");
+
+          if (filter) {
+            filterProducts(filter);
+          } else {
+            filterProducts("none");
+          }
+        });
+      </script>
+    </div>
+
+    <div class="container-fluid text-center footer">
+      <p>© 2025 Wakanda Souvenirs & Tours. All rights reserved.</p>
+      <p>Designed with pride in Wakanda | Privacy Policy | Terms of Service</p>
+    </div>
+    <div id="toast" class="toast">✔️ Added to basket!</div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const forms = document.querySelectorAll(".add-to-basket-form");
+
+    forms.forEach((form) => {
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        fetch(form.action, {
+          method: "POST",
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.success) {
+              showToast();
+              updateBasketCounter(data.basket_count);
+            }
+          });
+      });
+    });
+  });
+
+  function showToast() {
+    const toast = document.getElementById("toast");
+    toast.classList.add("show");
+
+    setTimeout(() => {
+      toast.classList.remove("show");
+    }, 3000);
+  }
+
+  function updateBasketCounter(newCount) {
+    const counter = document.getElementById("basket-count");
+    counter.textContent = newCount;
+  }
+</script>
+
+<script>
+  function sortProducts() {
+    const sortOption = document.getElementById("sort").value;
+    const productContainers = document.querySelectorAll(".products-container");
+
+    productContainers.forEach((container) => {
+      const rows = Array.from(container.querySelectorAll(".product-row"));
+
+      rows.sort((a, b) => {
+        const priceA = parseFloat(a.getAttribute("data-price"));
+        const priceB = parseFloat(b.getAttribute("data-price"));
+
+        if (sortOption === "low-to-high") {
+          return priceA - priceB;
+        } else if (sortOption === "high-to-low") {
+          return priceB - priceA;
+        } else {
+          return 0;
+        }
+      });
+
+      rows.forEach((row) => container.appendChild(row));
+    });
+  }
+</script>
